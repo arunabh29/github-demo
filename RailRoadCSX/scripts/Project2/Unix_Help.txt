@@ -1,0 +1,86 @@
+#############################################  Using find command  #############################################
+
+The find command is used to locate files on a Unix or Linux system.  find will search any set of directories you specify for files that match the supplied search criteria.  You can search for files by name, owner, group, type, permissions, date, and other criteria.  The search is recursive in that it will search all subdirectories too.  The syntax looks like this: 
+
+find where-to-look criteria what-to-doAll arguments to find are optional, and there are defaults for all parts.  (This may depend on which version of find is used.  Here we discuss the freely available Gnu version of find, which is the version available on YborStudent.)  For example, where-to-look defaults to . (that is, the current working directory), criteria defaults to none (that is, select all files), and what-to-do (known as the find action) defaults to -print (that is, display the names of found files to standard output).  Technically, the criteria and actions are all known as find primaries. 
+
+For example: 
+
+find will display the pathnames of all files in the current directory and all subdirectories.  The commands 
+
+find . -print
+find -print
+find .
+
+do the exact same thing.  Here's an example find command using a search criterion and the default action: 
+
+find / -name foo
+This will search the whole system for any files named foo and display their pathnames.  Here we are using the criterion -name with the argument foo to tell find to perform a name search for the filename foo.  The output might look like this: 
+
+/home/wpollock/foo
+/home/ua02/foo
+/tmp/foo
+If find doesn't locate any matching files, it produces no output. 
+
+The above example said to search the whole system, by specifying the root directory (“/”) to search.  If you don't run this command as root, find will display a error message for each directory on which you don't have read permission.  This can be a lot of messages, and the matching files that are found may scroll right off your screen.  A good way to deal with this problem is to redirect the error messages so you don't have to see them at all: 
+
+find / -name foo 2>/dev/nullYou can specify as many places to search as you wish: 
+
+find /tmp /var/tmp . $HOME -name foo
+
+
+As root, recursively assigning write permissions to group on the directory 'abc'. Directory 'abc' is in the current directory.
+sudo su - 
+chmod -R g+w ./abc
+
+********************************************************************************************************************************************
+********************************************************************************************************************************************
+
+Changing primary group as root
+sudo usermod -g <NewPrimaryGroupName> <TheTargetUserName>
+examples:
+sudo usermod -g prismr z_vobadm
+sudo usermod -g lms z_vobadm
+
+*****************************************************************************
+
+To see members of a group
+
+command       	output
+groups        	Shows groups that current user belongs to - first one is the primary group
+groups s8005  	Shows groups that user s8005 belongs to - first one is the primary group
+
+Alternative is
+id
+id s8005
+
+*****************************************************************************
+
+Copying all files/directories recursively from source to destination
+cp /opt/local/software/smappsController/PSE_-_New_Modular_Build_JSF_2.0_Deploy
+cp -r /opt/local/software/smappsController/PSE_-_New_Modular_Build_JSF_2.0_Deploy/* /home/t8054/Arunabh_sandbox/PSE_-_New_Modular_Build_JSF_2.0_Deploy_bkp
+
+Recursive directory/file delete
+rm -rf /opt/local/software/smappsController/PSE_-_New_Modular_Build_JSF_2.0_Deploy
+
+******************************************************************************
+
+List all directories for owner t8054 ----
+
+ls -al -d */ | grep t8054 | awk '{print $9}'
+
+
+Sort by filesize:
+ls -al -S
+
+******************************************************************************
+
+Permissions:
+
+     chmod u=rx file        (Give the owner rx permissions, not w)
+     chmod go-rwx file      (Deny rwx permission for group, others)
+     chmod g+w file         (Give write permission to the group)
+     chmod a+x file1 file2  (Give execute permission to everybody)
+     chmod g+rx,o+x file    (OK to combine like this with a comma)
+
+******************************************************************************

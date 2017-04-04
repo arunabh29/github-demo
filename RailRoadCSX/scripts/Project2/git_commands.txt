@@ -1,0 +1,157 @@
+# git list all commits
+git log --pretty=oneline --abbrev-commit
+
+# Removes last commit (HEAD), keep doing this until you have reached the commit you'd like to keep. 
+git reset --hard <commidId> && git clean -f
+
+http://stackoverflow.com/questions/7167645/how-do-i-create-a-new-git-branch-from-an-old-commit
+http://stackoverflow.com/questions/6591213/how-do-i-rename-a-local-git-branch
+
+# Create a new branch from an old commit and checkout that branch
+git checkout -b <new_branch> <old_commit_id>
+example:
+git checkout -b latest_master abcdef123
+
+# Remove old master branch locally and also from bitbucket
+git branch -D master
+
+# Rename latest_master to master 
+git branch -m latest_master master
+
+# Finally, push to origin (bitbucket)
+git push origin master
+
+
+******************************************************************************************************************************************
+
+-bash-4.1$ git checkout -b revised_master
+Switched to a new branch 'revised_master'
+-bash-4.1$ git status
+# On branch revised_master
+nothing to commit (working directory clean)
+-bash-4.1$ git log | grep commit
+commit cb281d2ab37ca3da04f56af263559b88a66eef48
+    This reverts commit 4d5b38bd665a73e6a7579ecb90faca71653216ff.
+commit 6e4a0e4139528e26153d6f8dfd21fde6a0199db9
+    Revert "Prod push committ"
+    This reverts commit 451877cd119203ae40fe528e5ffabfde48954b03.
+commit 6ece02a5b823de9c84d12f4addeb4871457d9677
+    This reverts commit 84625e97cfa5c61ac0c865fc58bf7bff6d78e331.
+commit f1267d62f8ed980f62b1f5c145ac82be38edfd01
+    * commit '84625e97cfa5c61ac0c865fc58bf7bff6d78e331':
+commit 84625e97cfa5c61ac0c865fc58bf7bff6d78e331
+commit ab2566a6f0955b752d2e77f5032f6ae61681f6f2
+    * commit '451877cd119203ae40fe528e5ffabfde48954b03':
+      Prod push committ
+commit 451877cd119203ae40fe528e5ffabfde48954b03
+    Prod push committ
+commit d5878aaadded17b564a3e83d6b7912f1b90b332b
+    * commit '4d5b38bd665a73e6a7579ecb90faca71653216ff':
+commit 4d5b38bd665a73e6a7579ecb90faca71653216ff
+commit ca3a2f61289cef90c4812e3febd181202f8ad176
+    * commit '9d96de20ee6ffff0b228671f6f6fe2a32e208a28':
+commit ce942c33fadc13a0814cb39ae5f5c5e71bbb0c53
+    * commit '9d96de20ee6ffff0b228671f6f6fe2a32e208a28':
+commit 9d96de20ee6ffff0b228671f6f6fe2a32e208a28
+commit a9ad5f2b9e717e084569cfe9e56959bc89e4c316
+    * commit '545465a5bb5c34621b416d9da36c684cad898611':
+commit 545465a5bb5c34621b416d9da36c684cad898611
+    * commit 'e9fd4972dc6a5c545a9543dbeeff4376590babb9':
+commit e9fd4972dc6a5c545a9543dbeeff4376590babb9
+commit b2fd8e3796990c879943baba1894958e7977abd3
+    * commit '67b448095469bc122dead3690f3ba0dfd73b43f8':
+commit 67b448095469bc122dead3690f3ba0dfd73b43f8
+commit ba17008bf9ca347c0d44fc37c34a2cc87be49c82
+    * commit 'fb626be894da625754d966db8b1a56b6b7436367':
+commit fb626be894da625754d966db8b1a56b6b7436367
+    * commit '721aa39ff48d87fb2d0729ada1e0807748bc39e0':
+commit 721aa39ff48d87fb2d0729ada1e0807748bc39e0
+commit cfcd43d1213ad3a6092e1244ce7ff0c47db47016
+    * commit '26dc137b7791cb159a5db8b0cfec283a0bb6f28a':
+commit 26dc137b7791cb159a5db8b0cfec283a0bb6f28a
+commit 302daa08a5789d11e194ecc924d977e7c168860f
+    * commit '40a68fdc5d98be38a35deb98c2d06c68488b98f3':
+commit 40a68fdc5d98be38a35deb98c2d06c68488b98f3
+    * commit 'e2c0bcc9d4493caab4784fe53290afe79a3f9f3a':
+commit e2c0bcc9d4493caab4784fe53290afe79a3f9f3a
+commit 939a644df82782f3fdf2abbe14fffddd25e9169c
+    * commit '4728a393d804d562f945e6e746244ebf1fe159cb':
+commit 4728a393d804d562f945e6e746244ebf1fe159cb
+commit f87e87b417c9a54924761b13362880bf843b656c
+    * commit 'f94295456b0a1db6ace2ff812a57c24fdd79eac9':
+commit f94295456b0a1db6ace2ff812a57c24fdd79eac9
+commit a068c4237729c1cc0c509c8aa28b4aa8583cc90b
+    * commit 'ee43cdf60573bad4ea3655b1d29730b2179805b6':
+commit ee43cdf60573bad4ea3655b1d29730b2179805b6
+commit 1068002a526807ab44cb3d0cda648eca4829e7f9
+    * commit '9a772819804834e5e98f18af431dd9f5c28632fb':
+commit 9a772819804834e5e98f18af431dd9f5c28632fb
+commit 23146b78457a602ae1d98cc96539d677560d9eef
+commit d1d34860c8c08424feaaa352c399464521ebf2ae
+    * commit '039d1aabd7bf41ce004b4687b4c7cdccca157fdc':
+commit 039d1aabd7bf41ce004b4687b4c7cdccca157fdc
+commit d367adf35521f4c28147e75e0570bf7e045d9a4d
+    * commit 'f8c9a7ab593f2dc0252e62babf8ba55da3bc9189':
+commit f8c9a7ab593f2dc0252e62babf8ba55da3bc9189
+commit 594b95da48a613886a718063b6c3197adac761ea
+    * commit 'fc9606bc905d947ef3facef12bda577d045fecc7':
+commit fc9606bc905d947ef3facef12bda577d045fecc7
+    * commit '6f865f70dca60677744432160327a349747d5d6d':
+commit 6f865f70dca60677744432160327a349747d5d6d
+    * commit '501a08db4d85d64841563317be1812faf07c978e':
+commit 501a08db4d85d64841563317be1812faf07c978e
+commit 96b9aac0500b7079c0a0b049784be26533c1604e
+    * commit 'c53d3e90f95ff244f29bf5dc43e8a4d4102f7cd8':
+commit c53d3e90f95ff244f29bf5dc43e8a4d4102f7cd8
+    * commit '7d2d54b994fe3e71e3ca56e1176ae3d0c69ce826':
+commit 7d2d54b994fe3e71e3ca56e1176ae3d0c69ce826
+    * commit '248cafc5e3bc71a34321c2d41d37c9ec3d02c936':
+commit 248cafc5e3bc71a34321c2d41d37c9ec3d02c936
+    * commit '25c727c48a30840e698d8e2de34cf7ad45aaa9e5':
+commit 25c727c48a30840e698d8e2de34cf7ad45aaa9e5
+commit 013fe610fb8fbc1ddcc2d2fb7ece50a62da7f7e1
+    * commit 'fe3990d24a110a611604dad8c3377c9d47c17b01':
+commit fe3990d24a110a611604dad8c3377c9d47c17b01
+commit 529ddd59181e03e02480a974cf9227bb19c60b6a
+    * commit '97fba85c910c6af58680e6d5c59e12ea12ace04a':
+commit 97fba85c910c6af58680e6d5c59e12ea12ace04a
+commit 48992d7dd55dfeb731b2c055f18acbbec79a5cee
+-bash-4.1$
+-bash-4.1$
+-bash-4.1$ git reset --hard 9d96de20ee6
+HEAD is now at 9d96de2 changes for new line character
+-bash-4.1$ git push origin revised_master
+Password:
+Total 0 (delta 0), reused 0 (delta 0)
+remote:
+remote: Create pull request for revised_master:
+remote:   https://git.csx.com/projects/PRICING/repos/prism2/compare/commits?sourceBranch=refs/heads/revised_master
+remote:
+To https://T8054@git.csx.com/scm/pricing/prism2.git
+ * [new branch]      revised_master -> revised_master
+-bash-4.1$ git checkout master
+Switched to branch 'master'
+-bash-4.1$ git branch -m master old_master
+-bash-4.1$ git push origin old_master
+Password:
+Total 0 (delta 0), reused 0 (delta 0)
+remote:
+remote: Create pull request for old_master:
+remote:   https://git.csx.com/projects/PRICING/repos/prism2/compare/commits?sourceBranch=refs/heads/old_master
+remote:
+To https://T8054@git.csx.com/scm/pricing/prism2.git
+ * [new branch]      old_master -> old_master
+-bash-4.1$ git branch -m revised_master master
+-bash-4.1$ git push origin master
+Password:
+Total 0 (delta 0), reused 0 (delta 0)
+remote:
+remote: Create pull request for master:
+remote:   https://git.csx.com/projects/PRICING/repos/prism2/compare/commits?sourceBranch=refs/heads/master
+remote:
+To https://T8054@git.csx.com/scm/pricing/prism2.git
+ * [new branch]      master -> master
+-bash-4.1$
+
+
+******************************************************************************************************************************************

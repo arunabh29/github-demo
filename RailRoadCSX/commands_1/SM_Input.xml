@@ -1,0 +1,40 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:max="http://www.ibm.com/maximo">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <max:SyncCSXRI>
+         <max:CSXRISet>
+            <!--Zero or more repetitions:-->
+            <max:RELEASEITEM action="AddChange">
+               <!--Optional:-->
+               <max:MAXINTERRORMSG>A</max:MAXINTERRORMSG>
+               <!--Optional:-->
+               <max:CHANGEBY>S6124</max:CHANGEBY>
+               <!--Optional:-->
+               <max:CHANGEDATE>2015-11-29T01:11:30-04:00</max:CHANGEDATE>
+               <!--Optional:-->
+               <max:CINUM></max:CINUM>
+               <!--Optional:-->
+               <max:CLASSSTRUCTUREID></max:CLASSSTRUCTUREID>
+               <!--Optional:-->
+               <max:CSXEXTERNALSYSTEM>JIRA</max:CSXEXTERNALSYSTEM>
+               <!--Optional:-->
+               <max:DESCRIPTION>Test.ear</max:DESCRIPTION>
+               <!--Optional:-->
+               <max:OBJECTTYPE>CR</max:OBJECTTYPE>
+               <!--Optional:-->
+               <max:PARENT>CSXTEST123</max:PARENT>
+               <!--Optional:-->
+               <max:RELEASEITEMID>1234</max:RELEASEITEMID>
+               <!--Optional:-->
+               <max:RELEASEITEMNUM>CSXTEST1234</max:RELEASEITEMNUM>
+               <!--Optional:-->
+               <max:RFCNUM></max:RFCNUM>
+               <!--Optional:-->
+               <max:STATUS>PROD</max:STATUS>
+               <!--Optional:-->
+               <max:STATUSDATE>2015-11-29T01:11:30-04:00</max:STATUSDATE>
+            </max:RELEASEITEM>
+         </max:CSXRISet>
+      </max:SyncCSXRI>
+   </soapenv:Body>
+</soapenv:Envelope>

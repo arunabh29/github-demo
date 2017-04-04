@@ -1,0 +1,2 @@
+select wochange.wonum from wochange where deployed='1'
+/

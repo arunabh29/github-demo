@@ -1,0 +1,119 @@
+Rebase in progress on stream "sx_P0002151b_dev".
+Started by "v8379" at 10/1/2013 11:36:56 AM.
+Rebase in progress on stream "sx_P0002151b_dev".
+Started by "v8379" at 10/1/2013 11:36:56 AM.
+
+
+cleartool rebase -reset -view sx_P0002151b_dev_2 -rmviewref sx_P0002151b_dev
+
+
+*******************************************************************************
+*******************************************************************************
+
+M:\sx_P0002151b_dev_2>cleartool rebase -cancel -force
+Rebase in progress on stream "sx_P0002151b_dev".
+Started by "v8379" at 10/1/2013 11:36:56 AM.
+cleartool: Error: Rebase in progress on stream "sx_P0002151b_dev" using
+view "v8379_sx_P0002151b_dev_dyn" does not match the view specified.
+cleartool: Error: View "sx_P0002151b_dev_2" is not the view in which you started this operation.
+cleartool: Error: Unable to cancel rebase.
+
+M:\sx_P0002151b_dev_2>cleartool lsview -long sx_P0002151b_dev
+No view object entry exists for view tag "sx_P0002151b_dev"
+Tag: sx_P0002151b_dev
+  Global path: \\Ws-jax-f8164-2k\ccstg\sx_P0002151b_dev.vws
+  Server host: Ws-jax-f8164-2k
+  Region: jax_windows
+  Active: NO
+  View tag uuid:4c8fdad2.8e414b95.bf0d.93:3b:61:08:fe:5f
+
+
+M:\sx_P0002151b_dev_2>cleartool desc vob:/shipcsx2
+versioned object base "\shipcsx2"
+  created 2004-04-22T13:24:37-04:00 by Clear Case Admin Account (z_vobadm.ShipCSXR@rs113)
+  VOB family feature level: 4
+  VOB storage host:pathname "cc7-registry:/opt/local/software/clearcode/vobs/shipcsx/shipcsx2.vbs"
+  VOB storage global pathname "\\mp_vfiler\prodvobs\shipcsx\shipcsx2.vbs"
+  database schema version: 54
+  modification by remote privileged user: allowed
+  atomic checkin: disabled
+  VOB ownership:
+    owner CSX\z_vobadm
+    group CSX\shipcsxr
+  Additional groups:
+    group CSX\clearcas
+  Attributes:
+    FeatureLevel = 4
+  Hyperlinks:
+    AdminVOB -> vob:\csx_pvob
+
+M:\sx_P0002151b_dev_2>
+
+*******************************************************************************
+*******************************************************************************
+
+$$$$$$$$$$$###########$$$$$$$$$$$$$$$$####################
+
+NEED TO BE VERY CAREFUL WITH THE BELOW AS IT WRITES DIRECTLY INTO THE CC DATABASE TO RESET THE REBASE/DELIVER TAGS
+
+$$$$$$$$$$$###########$$$$$$$$$$$$$$$$####################
+
+If the above does not work, use the utility called ucmutil.exe at
+C:\Program Files (x86)\IBM\RationalSDLC\ClearCase\etc\utils.
+So the path variable should have it.
+
+For cancelling rebase Use:
+ucmutil> setpvar -pvar UCM_REBASE -none stream:<stream_name>@\<pvob_name>
+
+example:
+ucmutil> setpvar -pvar UCM_REBASE -none stream:gt_gdrloadtools01_dev@\csx_egis
+
+Likewise for cancelling deliver, use
+ucmutil> setpvar -pvar UCM_DELIVER -none stream:<stream_name>@\<pvob_name>
+
+###############################################################################################################################################################################
+###############################################################################################################################################################################
+
+Issues faced while using this:
+
+Rebase to be cancelled
+Started by: t3620
+Started on: 2014-04-03T13:44:44-04:00
+Integration view: ts3620_ts_TMTN_dev_DYN
+Integration activity: CSX00207068
+
+
+M:\gt_gdrloadtools01_dev>cleartool rebase -cancel -view ts3620_ts_TMTN_dev_DYN
+Rebase in progress on stream "ts_TMTN_dev".
+Started by "t3620" at 4/3/2014 1:44:44 PM.
+Are you sure you want to cancel this rebase?  [no] y
+Undoing checkins...
+Undoing file merges...
+cleartool: Warning: Unable to remove "M:\ts3620_ts_TMTN_dev_DYN\tcis1\docs\incidents.cfm": Permission denied.
+Removing integration activity...
+Restoring rebase view's previous config spec...
+cleartool: Warning: Config spec OK, but unable to tell view server to load.
+cleartool: Warning: View server should be restarted.
+cleartool: Error: Unexpected error in rebase.
+cleartool: Error: Unable to undo update of config.
+cleartool: Error: Unexpected error in rebase.
+cleartool: Error: Unable to cancel rebase.
+
+
+ucmutil> setpvar -pvar UCM_REBASE -none stream:ts_TMTN_dev@\csx_pvob
+You are about to modify internal data. Any mistake will damage the objects.
+Do you want to continue? [no] y
+ucmutil: Error: Creating new PVAR is not allowed.
+ucmutil> setpvar -pvar UCM_REBASE -none stream:ts_TMTN_dev@\csx_pvob
+You are about to modify internal data. Any mistake will damage the objects.
+Do you want to continue? [no] y
+ucmutil: Error: Creating new PVAR is not allowed.
+ucmutil> exit
+
+Solution: 
+Deleted old dynamic view used for rebase and created a new dynamic view.
+Rebased from the new dynamic view and had no issues.
+
+
+###############################################################################################################################################################################
+###############################################################################################################################################################################

@@ -1,0 +1,85 @@
+
+echo "################################################################"
+echo "################################################################"
+echo "                                                                "
+echo "Displaying command-line variables that were passed along with their values"
+echo "                                                                "
+
+echo "################################################################"
+echo "################################################################"
+echo "                                                                "
+
+
+echo "Value of CSX_PROJECT_BASEDIR = " ${bamboo_build_working_directory}
+echo "Value of BUILD_VERSION = " ${bamboo_planRepository_branch}
+echo "Value of DEPLOY_TO = " ${bamboo_DEPLOY_TO}
+
+echo "                                                                "
+echo "                                                                "
+
+EAR_NAME=$1
+PROJECT_TO_BUILD=$2
+BAMBOO_PROJECT=$3
+BAMBOO_PLAN=$4
+CSX_MODULE_ROOT=$5
+
+echo "Passed value of EAR_NAME = " $EAR_NAME
+echo "Passed value of PROJECT_TO_BUILD = " $PROJECT_TO_BUILD
+echo "Passed value of BAMBOO_PROJECT = " $BAMBOO_PROJECT
+echo "Passed value of BAMBOO_PLAN = " $BAMBOO_PLAN
+echo "Passed value of CSX_MODULE_ROOT = " $CSX_MODULE_ROOT
+
+echo "                                                                "
+echo "                                                                "
+
+########################################################################################
+# Non-editable variables section
+########################################################################################
+
+PYTHON_SCRIPT_LOC=/opt/shared/atlassian/bamboo/buildfiles/buildforge/leapfrog
+CSX_PROJECT_BASEDIR=${bamboo_build_working_directory}
+WAS_DIR=/opt/local/scripts
+
+BUILD_VERSION=${bamboo_planRepository_branch}
+
+if [ ${BUILD_VERSION} == develop ]
+    then
+        cd /opt/local/software/smappsController/BAMBOO_BUILDS/${BAMBOO_PROJECT}/${BAMBOO_PLAN}/DEV
+        echo Removing all but the last three build directories.
+        echo Removing these directories: `ls -t | awk 'NR>3'`
+        ls -t | awk 'NR>3' | xargs rm -rf
+fi
+
+
+if [ ${BUILD_VERSION} == test ]
+    then
+        cd /opt/local/software/smappsController/BAMBOO_BUILDS/${BAMBOO_PROJECT}/${BAMBOO_PLAN}/UAT
+        echo Removing all but the last three build directories.
+        echo Removing these directories: `ls -t | awk 'NR>3'`
+        ls -t | awk 'NR>3' | xargs rm -rf
+fi
+
+if [ ${BUILD_VERSION} == master ]
+    then
+        cd /opt/local/software/smappsController/BAMBOO_BUILDS/${BAMBOO_PROJECT}/${BAMBOO_PLAN}/PROD
+        echo Removing all but the last three build directories.
+        echo Removing these directories: `ls -t | awk 'NR>3'`
+        ls -t | awk 'NR>3' | xargs rm -rf
+fi
+
+
+if [ ${BUILD_VERSION} == develop -o ${BUILD_VERSION} == test -o ${BUILD_VERSION} == master ]
+    then
+        echo "Not a custom build"
+    else
+        cd /opt/local/software/smappsController/BAMBOO_BUILDS/${BAMBOO_PROJECT}/${BAMBOO_PLAN}/CUSTOM
+	 echo Removing all but the last three build directories.
+        echo Removing these directories: `ls -t | awk 'NR>3'`
+        ls -t | awk 'NR>3' | xargs rm -rf
+fi
+
+
+
+# Cleanup the build working directory
+echo Removing working directory: ${bamboo_build_working_directory}
+# rm -rf ${bamboo_build_working_directory}

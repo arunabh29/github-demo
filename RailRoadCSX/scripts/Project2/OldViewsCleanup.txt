@@ -1,0 +1,339 @@
+Removing checkout from the deleted snapshot view 
+
+Here we could not delete the checkout version of the file because the 
+View was already deleted (not in a proper way) while the file was 
+still checked out. On top of that view tag and view registry object 
+had been deleted. 
+
+
+In this kind of situation: 
+1       Log into he location/server where the vob is stored. 
+
+
+2       Do the describe on the vob 
+        Serverlocation\Vobs> cleartool describe -long vob:\VOBNAME 
+        NOTE: It should show the list of views associated with the VOB. It 
+should also display the uuid of that particular view 
+        Just to check if there is view tag and/or view registry: do following 
+        Serverlocation\Vobs>cleartool lsview -l -uuid UUID_NUMBER 
+        Serverlocation\Vobs>cleartool unregister -view -uuid UUID_NUMBER 
+
+
+3       Get the uuid of the view from which the files has been checked out. 
+
+cleartool
+4.      Remove View- related records from all VOBS 
+        Serverlocation\Vobs>cleartool rmview -all -uuid UUID_NUMBER 
+
+
+5       Check if the reference to the view is still present in the VOB 
+        Serverlocation\Vobs>cleartool describe -long vob:\VOBNAME 
+
+
+        NOTE: If you do the version tree of the file again, then the checkout 
+branch from the deleted view should be gone.
+
+************************************************************************************************************************************************
+CASE
+
+
+2012-02-10     c-napatiba checkout version "M:\BM_UCMS_R2_2_Dev\UCMS_Shared_Portlets\app\UCMS_Shared_Portlets\.classpath" from \main\UCMS_Release_2_Int\UCMS_R2_2_Dev\1 (reserved)
+2012-02-10     c-napatiba checkout version "M:\BM_UCMS_R2_2_Dev\UCMS_Receivables_Portlets\app\UCMS_Receivables_Portlets\WebContent\META-INF\MANIFEST.MF" from \main\UCMS_Release_2_Int\UCMS_R2_2_Dev\1 (reserved)
+2012-02-10     c-napatiba checkout version "M:\BM_UCMS_R2_2_Dev\UCMS_Accounting_Portlets\app\UCMS_Accounting_Portlets\.classpath" from \main\UCMS_Release_2_Int\UCMS_R2_2_Dev\1 (reserved)
+2012-02-10     c-napatiba checkout version "M:\BM_UCMS_R2_2_Dev\UCMS_Registration_Portlets\app\UCMS_Registration_Portlets\.classpath" from \main\UCMS_Release_2_Int\UCMS_R2_2_Int\UCMS_R2_2_Dev\0 (reserved)
+2012-02-08     c-napatiba checkout version "M:\BM_UCMS_R2_2_Dev\UCMS_Wage_Portlets\app\UCMS_Wage_Portlets\.classpath" from \main\UCMS_Release_1_Int\UCMS_Release_2_Int\UCMS_R2_2_Dev\3 (reserved)
+
+
+
+M:\BM_UCMS_R2_2_Dev>cleartool describe -long vob:\UCMS_Shared_Portlets | grep 'c-napatiba'
+    checkout version: 23222ebd.28fb49fb.bab7.f8:d2:c2:61:74:e7 in view "c-napatiba_UCMS_R2_2_Dev" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws [uuid dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb]
+
+
+
+
+E:\cc_stg>cleartool describe -long vob:\UCMS_Shared_Portlets | grep 'c-napatiba'
+'grep' is not recognized as an internal or external command,
+operable program or batch file.
+
+E:\cc_stg>cleartool describe -long vob:\UCMS_Shared_Portlets
+versioned object base "\UCMS_Shared_Portlets"
+  created 2008-08-04T14:44:13-04:00 by Clearcase (lisvccc01.Domain Users@LIHBG000AP27)
+  "Shared portlets"
+  VOB family feature level: 5
+  VOB storage host:pathname "lihbg000apc1:E:\cc_stg\UCMS_Shared_Portlets.vbs"
+  VOB storage global pathname "E:\cc_stg\UCMS_Shared_Portlets.vbs"
+  database schema version: 54
+  modification by remote privileged user: allowed
+  atomic checkin: disabled
+  srfm: disabled
+  VOB ownership:
+    owner CWOPA\lisvccc01
+    group CWOPA\Domain Users
+  VOB holds objects from the following views:
+    lihbg000ap27:v:\ClearCase_Storage\views\CWOPA\c-rosharma\UCMS_R3_2_Dev.vws [uuid 72e3fd83.b8644399.9584.0b:71:0e:8b:92:98]
+    checkout version: 969fece8.5bf94fb4.a2ad.b1:4e:17:14:e9:1f in view "c-skolusu_UCMS_R3_2_Dev" from replica: "original"
+    lihbg000ap27:v:\ClearCase_Storage\views\CWOPA\c-skolusu\UCMS_R3_2_Dev.vws [uuid bdfbe3c4.ff04414c.beff.f3:21:fb:55:42:98]
+    checkout version: 80a4a9f1.ded14601.83a8.c4:df:80:06:21:85 in view "c-vchennup_UCMS_R2_2_Dev" from replica: "original"
+    lihbg000ap27:v:\ClearCase_Storage\views\CWOPA\c-vchennup\c-vchennup_UCMS_R2_2_Dev.vws [uuid 12bf03d4.1d5644e8.89e4.a8:1f:af:f3:93:f0]
+    checkout version: 66be8133.271f4c03.806e.64:39:78:27:5f:32 in view "c-lvaka_UCMS_R2_2_Dev_2" from replica: "original"
+    lihbg000ap27:v:\ClearCase_Storage\views\CWOPA\c-lvaka\c-lvaka_UCMS_R2_2_Dev_2.vws [uuid e6e22725.cad24eff.a99a.dd:ca:22:61:4e:fc]
+    checkout version: fe9a5a3e.df3e4670.b432.62:b5:c0:f6:8a:d7 in view "c-rsurapur_UCMS_R3_3_Dev_2" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-rsurapur\UCMS_R3_3_Dev_2.vws [uuid 7a81a0a4.d7624072.ac61.ff:05:96:82:bd:70]
+    checkout version: a551bd3d.a14c43b7.99d4.65:35:6b:0b:cf:c3 in view "vicummings_UCMS_R3_3_Dev_2_New" from replica: "original"
+    checkout version: c41f639e.f926487d.8cd3.91:ce:46:1b:e3:ba in view "vicummings_UCMS_R3_3_Dev_2_New" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\vicummings\UCMS_R3_3_Dev_2_New.vws [uuid 3159c0eb.172e4250.80d6.da:87:01:a1:fc:0f]
+    checkout version: 23222ebd.28fb49fb.bab7.f8:d2:c2:61:74:e7 in view "c-napatiba_UCMS_R2_2_Dev" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws [uuid dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb]
+    checkout version: 9f298e22.5ecd49bd.be36.ed:da:90:a4:99:3a in view "c-hozhang_RSA8_R3" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-hozhang\RSA8_R3.vws [uuid 710ae453.48d24323.a60e.06:db:ff:e9:be:6e]
+    checkout version: 21463d6c.b9b049f6.814c.81:89:24:42:e9:f6 in view "c-pdandamu_UCMS_R2_2_int_praveen" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-pdandamu\c-pdandamu_UCMS_R2_2_int_praveen.vws [uuid 1bdc0de8.6d47495f.9aa0.4f:b8:02:13:a5:85]
+    checkout version: 7244e3d2.f202410e.aa99.d0:b9:ce:60:fa:8c in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 1ab3f22f.a76142aa.a4d6.e4:87:a7:e0:b7:a9 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: f5cd3117.359149f6.8652.bf:97:2b:c6:a2:95 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 6e8290fe.fe4a4a54.93ec.bb:c2:d8:c2:47:2a in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 4c466bf9.7e2c4648.b084.46:00:5b:eb:b8:d0 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 908bca69.f71940ee.98ff.ba:da:63:c6:22:48 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 9c62fc1f.62b44e88.87c5.07:48:43:93:5d:f5 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 3c631b2b.59234826.9c18.81:75:99:1f:7b:9c in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 4233cb60.42af4e46.88fb.31:6a:a2:30:7f:89 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: ebb5f207.29d34598.84b5.96:61:69:49:33:0b in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 66bb996c.f9414657.90fe.f7:8e:f8:4a:be:41 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 2f77654e.2ad34f7e.bf19.cf:a5:63:91:7c:0a in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 61607294.9d8940a9.a9b0.4f:c6:65:0f:74:74 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: cf6e330a.bc7d4543.beaf.aa:00:cb:e7:87:6e in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: fde3f7cd.7ee34901.be1d.13:c8:27:38:82:b9 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: a1f8d4a5.a3c3416e.b68f.5b:5e:7d:59:9b:c7 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-hozhang\R3_3_DEV_WAS7.vws [uuid ab173a50.18814242.b8cd.b3:85:22:f9:a6:17]
+    checkout version: f3c7bff5.b0314e95.a4ec.ea:d6:a2:b3:d6:34 in view "c-mraichur_UCMS_R3_3_FT_Dev_4" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-mraichur\UCMS_R3_3_FT_Dev_4.vws [uuid 0a27020d.4a654fe1.982c.94:02:67:ed:46:ca]
+  Attributes:
+    FeatureLevel = 5
+  Hyperlinks:
+    AdminVOB@42@\UCMS_Shared_Portlets -> vob:\PVOB_UCMS_PROD
+
+E:\cc_stg>cleartool lsview -l -uuid dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb
+Tag: c-napatiba_UCMS_R2_2_Dev
+  Global path: \\lihbg000apc2\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws
+  Server host: lihbg000apc2
+  Region: pa_ucms_win
+  Active: NO
+  View tag uuid:dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb
+View on host: lihbg000apc2
+View server access path: E:\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws
+View uuid: dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb
+View attributes: snapshot,ucmview
+View owner: CWOPA\c-napatiba
+
+
+E:\cc_stg>cleartool unregister -view -uuid dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb
+
+E:\cc_stg>cleartool rmview -all -uuid dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb
+Can't remove view "\\lihbg000apc2\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" from VOB while view still exists.
+
+Remove view "\\lihbg000apc2\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" references from VOB anyway?  [no] no
+
+E:\cc_stg>cleartool rmview -all -uuid dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb
+Can't remove view "\\lihbg000apc2\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" from VOB while view still exists.
+
+Remove view "\\lihbg000apc2\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" references from VOB anyway?  [no] yes
+cleartool: Error: Unable to find view by uuid:dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb, last known at "<XXX>:<XXX>".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\3rd_Party.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\FrmkRefApp.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\FTS_VOB.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\ReqPro.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\Requirements.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\Rules.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\SCM.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\Security.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\test.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\Test_Scripts_VOB.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\TrainingVOB.vbs".
+Removed references to view "lihbg000apc2:E:\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Accounting_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Appeal_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Audit_RCP.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Benefits_IVR.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Benefits_MDBs.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Benefits_Services.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_BO_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Build_Stage.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_BusinessProcess.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_BusinessProcess_Library.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_BusinessProcess_Services.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_BusinessProcess_Services_R2.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_ClaimantRegistration.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_CM_Appeals_Core.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Collections_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_CollectOverpayment_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_CommonFunctions_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_CommonMods_Services.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_CommonWorkflow_EJB.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_CommonWorkflow_EJBClient.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_CommonWorkflow_Services.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Compliance.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Compliance_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Configuration.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_ContinuedClaim_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Conversion.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Core.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_CorticonExtension.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_DollarUniverse.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Ear.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_EmployerBenefitActivity_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_FederalAudit_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_FieldAudit_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_FieldAudit_RCP_Configuration.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_FieldAudit_RCP_Core.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_FieldAudit_RCP_Ear.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_FieldAudit_RCP_JARs.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_FieldAudit_RCP_UI.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_FieldAudit_Webstart.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_FM_BMTest.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Forms_and_Notices.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Fraud_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Frmk_Extns.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Frmk_Extns_CBE.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Frmk_Extns_DAS.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Frmk_Extns_SEC.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_HumanTask.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_HumanTask_Services.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_IAM_Services_Client.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_IntakeClaims_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Interface.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_JET.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_JET_Plugin.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_JET_R2R0.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Login.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Monetary_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_NonMonetary_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Portal.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_R2_2_FA.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Rating_Portlets.vbs".
+Removed references to view "lihbg000apc2:E:\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Receivables_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Reference_Application.vbs".
+Removed references to view "lihbg000apc2:E:\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Registration_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Report_ETL.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Security_Test_EJB.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Services_Test_Client.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Service_Clients.vbs".
+Removed references to view "lihbg000apc2:E:\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Shared_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_SupportingFunctions_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_TaxAppeals_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Tax_MDBs.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Tax_Services.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_USDOL_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_UserDefinedCalendar_Client.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_UserDefinedCalendar_EJB.vbs".
+Removed references to view "lihbg000apc2:E:\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Wage_Portlets.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Wage_Services.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_WebMethods.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_WorkFlow_EJB.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_WorkFlow_EJBClient.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "LIHBG000APC1:E:\cc_stg\UCMS_Workflow_Services.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "lihbg000apc1:E:\cc_stg\EDR.vbs".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "lihbg000apc1:E:\cc_stg\Deliverables.vbs".
+Removed references to view "lihbg000apc2:E:\cc_stg\CWOPA\c-napatiba\UCMS_R2_2_Dev.vws" from VOB "\PVOB_UCMS_PROD".
+Removed references to view "dda4bebc.327c4672.b3b1.dc:bd:9a:f8:b5:bb" from VOB "lihbg000apc1:E:\cc_stg\UCMS_Submit.vbs".
+
+E:\cc_stg>cleartool describe -long vob:\UCMS_Shared_Portlets | grep 'c-napatiba'
+'grep' is not recognized as an internal or external command,
+operable program or batch file.
+
+E:\cc_stg>cleartool describe -long vob:\UCMS_Shared_Portlets
+versioned object base "\UCMS_Shared_Portlets"
+  created 2008-08-04T14:44:13-04:00 by Clearcase (lisvccc01.Domain Users@LIHBG000AP27)
+  "Shared portlets"
+  VOB family feature level: 5
+  VOB storage host:pathname "lihbg000apc1:E:\cc_stg\UCMS_Shared_Portlets.vbs"
+  VOB storage global pathname "E:\cc_stg\UCMS_Shared_Portlets.vbs"
+  database schema version: 54
+  modification by remote privileged user: allowed
+  atomic checkin: disabled
+  srfm: disabled
+  VOB ownership:
+    owner CWOPA\lisvccc01
+    group CWOPA\Domain Users
+  VOB holds objects from the following views:
+    lihbg000ap27:v:\ClearCase_Storage\views\CWOPA\c-rosharma\UCMS_R3_2_Dev.vws [uuid 72e3fd83.b8644399.9584.0b:71:0e:8b:92:98]
+    checkout version: 969fece8.5bf94fb4.a2ad.b1:4e:17:14:e9:1f in view "c-skolusu_UCMS_R3_2_Dev" from replica: "original"
+    lihbg000ap27:v:\ClearCase_Storage\views\CWOPA\c-skolusu\UCMS_R3_2_Dev.vws [uuid bdfbe3c4.ff04414c.beff.f3:21:fb:55:42:98]
+    checkout version: 80a4a9f1.ded14601.83a8.c4:df:80:06:21:85 in view "c-vchennup_UCMS_R2_2_Dev" from replica: "original"
+    lihbg000ap27:v:\ClearCase_Storage\views\CWOPA\c-vchennup\c-vchennup_UCMS_R2_2_Dev.vws [uuid 12bf03d4.1d5644e8.89e4.a8:1f:af:f3:93:f0]
+    checkout version: 66be8133.271f4c03.806e.64:39:78:27:5f:32 in view "c-lvaka_UCMS_R2_2_Dev_2" from replica: "original"
+    lihbg000ap27:v:\ClearCase_Storage\views\CWOPA\c-lvaka\c-lvaka_UCMS_R2_2_Dev_2.vws [uuid e6e22725.cad24eff.a99a.dd:ca:22:61:4e:fc]
+    checkout version: fe9a5a3e.df3e4670.b432.62:b5:c0:f6:8a:d7 in view "c-rsurapur_UCMS_R3_3_Dev_2" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-rsurapur\UCMS_R3_3_Dev_2.vws [uuid 7a81a0a4.d7624072.ac61.ff:05:96:82:bd:70]
+    checkout version: a551bd3d.a14c43b7.99d4.65:35:6b:0b:cf:c3 in view "vicummings_UCMS_R3_3_Dev_2_New" from replica: "original"
+    checkout version: c41f639e.f926487d.8cd3.91:ce:46:1b:e3:ba in view "vicummings_UCMS_R3_3_Dev_2_New" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\vicummings\UCMS_R3_3_Dev_2_New.vws [uuid 3159c0eb.172e4250.80d6.da:87:01:a1:fc:0f]
+    checkout version: 9f298e22.5ecd49bd.be36.ed:da:90:a4:99:3a in view "c-hozhang_RSA8_R3" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-hozhang\RSA8_R3.vws [uuid 710ae453.48d24323.a60e.06:db:ff:e9:be:6e]
+    checkout version: 21463d6c.b9b049f6.814c.81:89:24:42:e9:f6 in view "c-pdandamu_UCMS_R2_2_int_praveen" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-pdandamu\c-pdandamu_UCMS_R2_2_int_praveen.vws [uuid 1bdc0de8.6d47495f.9aa0.4f:b8:02:13:a5:85]
+    checkout version: 7244e3d2.f202410e.aa99.d0:b9:ce:60:fa:8c in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 1ab3f22f.a76142aa.a4d6.e4:87:a7:e0:b7:a9 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: f5cd3117.359149f6.8652.bf:97:2b:c6:a2:95 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 6e8290fe.fe4a4a54.93ec.bb:c2:d8:c2:47:2a in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 4c466bf9.7e2c4648.b084.46:00:5b:eb:b8:d0 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 908bca69.f71940ee.98ff.ba:da:63:c6:22:48 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 9c62fc1f.62b44e88.87c5.07:48:43:93:5d:f5 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 3c631b2b.59234826.9c18.81:75:99:1f:7b:9c in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 4233cb60.42af4e46.88fb.31:6a:a2:30:7f:89 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: ebb5f207.29d34598.84b5.96:61:69:49:33:0b in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 66bb996c.f9414657.90fe.f7:8e:f8:4a:be:41 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 2f77654e.2ad34f7e.bf19.cf:a5:63:91:7c:0a in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: 61607294.9d8940a9.a9b0.4f:c6:65:0f:74:74 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: cf6e330a.bc7d4543.beaf.aa:00:cb:e7:87:6e in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: fde3f7cd.7ee34901.be1d.13:c8:27:38:82:b9 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    checkout version: a1f8d4a5.a3c3416e.b68f.5b:5e:7d:59:9b:c7 in view "c-hozhang_R3_3_DEV_WAS7" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-hozhang\R3_3_DEV_WAS7.vws [uuid ab173a50.18814242.b8cd.b3:85:22:f9:a6:17]
+    checkout version: f3c7bff5.b0314e95.a4ec.ea:d6:a2:b3:d6:34 in view "c-mraichur_UCMS_R3_3_FT_Dev_4" from replica: "original"
+    lihbg000apc2:E:\cc_stg\CWOPA\c-mraichur\UCMS_R3_3_FT_Dev_4.vws [uuid 0a27020d.4a654fe1.982c.94:02:67:ed:46:ca]
+  Attributes:
+    FeatureLevel = 5
+  Hyperlinks:
+    AdminVOB@42@\UCMS_Shared_Portlets -> vob:\PVOB_UCMS_PROD
+
+E:\cc_stg>
+
+************************************************************************************************************************************************ 
+
+cleartool unregister -view -uuid 828e2584.47104f91.95da.81:cd:86:b7:00:37
+cleartool rmview -all -uuid 828e2584.47104f91.95da.81:cd:86:b7:00:37
+
+cleartool unregister -view -uuid 010b26c3.45e347ab.8838.ba:a6:88:9b:f3:a8
+cleartool rmview -all -uuid 010b26c3.45e347ab.8838.ba:a6:88:9b:f3:a8
+
+
+cleartool unregister -view -uuid 21a40589.30f911e3.8b2b.00:50:56:b8:23:78
+cleartool rmview -all -uuid 21a40589.30f911e3.8b2b.00:50:56:b8:23:78
+
+cleartool unregister -view -uuid dbeeaa41.ca0811e2.9254.00:50:56:b8:23:78
+cleartool rmview -all -uuid dbeeaa41.ca0811e2.9254.00:50:56:b8:23:78
+
+cleartool unregister -view -uuid fe681287.9e0240fb.b416.ff:4c:df:09:d7:c5
+cleartool rmview -all -uuid fe681287.9e0240fb.b416.ff:4c:df:09:d7:c5
+
+
+
+****************************************************************************************************************
+SR352379
+
+cleartool unregister -view -uuid a3c17fe2.9ca4433a.a0a7.e7:26:c5:e9:a5:fd
+cleartool rmview -all -uuid a3c17fe2.9ca4433a.a0a7.e7:26:c5:e9:a5:fd
+
+C:\Users\T8054>cleartool lsview -long s7149_ts_P0007197a_dev
+No view object entry exists for view tag "s7149_ts_P0007197a_dev"
+Tag: s7149_ts_P0007197a_dev
+  Global path: \\VMATCS7149W7\ccstg\s7149_ts_P0007197a_dev.vws
+  Server host: VMATCS7149W7
+  Region: jax_windows
+  Active: NO
+  View tag uuid:a3c17fe2.9ca4433a.a0a7.e7:26:c5:e9:a5:fd
+
+*******************  Just need to remove the tag now  *******************
+
+C:\Users\T8054>
+

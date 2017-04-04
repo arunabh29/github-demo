@@ -1,0 +1,131 @@
+
+echo "################################################################"
+echo "################################################################"
+echo "                                                                "
+echo "Displaying command-line variables that were passed along with their values"
+echo "                                                                "
+
+echo "################################################################"
+echo "################################################################"
+echo "                                                                "
+
+
+echo "Value of CSX_PROJECT_BASEDIR = " ${bamboo_build_working_directory}
+echo "Value of BUILD_VERSION = " ${bamboo_planRepository_branch}
+echo "Value of DEPLOY_TO = " ${bamboo_DEPLOY_TO}
+
+echo "                                                                "
+echo "                                                                "
+
+EAR_NAME=$1
+PROJECT_TO_BUILD=$2
+BAMBOO_PROJECT=$3
+BAMBOO_PLAN=$4
+CSX_MODULE_ROOT=$5
+
+echo "Passed value of EAR_NAME = " $EAR_NAME
+echo "Passed value of PROJECT_TO_BUILD = " $PROJECT_TO_BUILD
+echo "Passed value of BAMBOO_PROJECT = " $BAMBOO_PROJECT
+echo "Passed value of BAMBOO_PLAN = " $BAMBOO_PLAN
+echo "Passed value of CSX_MODULE_ROOT = " $CSX_MODULE_ROOT
+
+echo "                                                                "
+echo "                                                                "
+
+
+########################################################################################
+# DO NOT edit this section
+########################################################################################
+PYTHON_SCRIPT_LOC=/opt/shared/atlassian/bamboo/buildfiles/buildforge/leapfrog
+CSX_PROJECT_BASEDIR=${bamboo_build_working_directory}
+BUILD_VERSION=${bamboo_planRepository_branch}
+
+if [ ${BUILD_VERSION} == develop ]
+    then
+        BUILD_RESULTS=/opt/local/software/smappsController/BAMBOO_BUILDS/${BAMBOO_PROJECT}/${BAMBOO_PLAN}/DEV/BUILD_${bamboo_buildNumber}
+fi
+
+
+if [ ${BUILD_VERSION} == test ]
+    then
+        BUILD_RESULTS=/opt/local/software/smappsController/BAMBOO_BUILDS/${BAMBOO_PROJECT}/${BAMBOO_PLAN}/UAT/BUILD_${bamboo_buildNumber}
+fi
+
+if [ ${BUILD_VERSION} == master ]
+    then
+        BUILD_RESULTS=/opt/local/software/smappsController/BAMBOO_BUILDS/${BAMBOO_PROJECT}/${BAMBOO_PLAN}/PROD/BUILD_${bamboo_buildNumber}
+fi
+
+
+if [ ${BUILD_VERSION} == develop -o ${BUILD_VERSION} == test -o ${BUILD_VERSION} == master ]
+    then
+        echo "Not a custom build"
+    else
+        echo "Creating BUILD_RESULTS directory for custom build"
+        BUILD_RESULTS=/opt/local/software/smappsController/BAMBOO_BUILDS/${BAMBOO_PROJECT}/${BAMBOO_PLAN}/CUSTOM/BUILD_${bamboo_buildNumber}
+fi
+
+
+
+
+########################################################################################
+########################################################################################
+
+
+echo The deploy version is: ${bamboo_DEPLOY_TO}
+
+echo "########################################################################################"
+echo "########################################################################################"
+
+echo Current value of PYTHON_SCRIPT_LOC is ${PYTHON_SCRIPT_LOC}
+echo Current value of CSX_PROJECT_BASEDIR is ${CSX_PROJECT_BASEDIR}
+echo Current value of BUILD_RESULTS is ${BUILD_RESULTS}
+echo Current value of EAR_NAME is ${EAR_NAME}
+echo Current value of CSX_MODULE_ROOT is ${CSX_MODULE_ROOT}
+echo Current value of PROJECT_TO_BUILD is ${PROJECT_TO_BUILD}
+
+echo "########################################################################################"
+echo "########################################################################################"
+
+echo "########################################################################################"
+echo "########################### STARTING BUILD NOW #########################################"
+echo "########################################################################################"
+
+python ${PYTHON_SCRIPT_LOC}/build.py workingLoc=${CSX_PROJECT_BASEDIR}/${CSX_MODULE_ROOT} buildDir=${BUILD_RESULTS} scriptsHome=${PYTHON_SCRIPT_LOC} earFileName=${EAR_NAME} projectNames=${PROJECT_TO_BUILD}
+
+
+echo "########################################################################################"
+echo "####################  COMPLETED EXECUTION OF PYTHON SCRIPT  ############################"
+echo "########################################################################################"
+
+
+echo "########################################################################################"
+echo "####################  CREATING A TAG FOR PRODUCTION BUILD  ############################"
+echo "########################################################################################"
+
+
+if [ ${bamboo_planRepository_branchName} == master ]
+ then
+
+    # Creating a tag for this prod build:
+    TAG_TS=`date +%y%m%d%H%M%S`
+    DATE_STR=`date`
+    TAG_NAME=${BAMBOO_PROJECT}_${BAMBOO_PLAN}_${TAG_TS}_BUILD_${bamboo_buildNumber}
+    TAG_MESSAGE="Tagging production build: BUILD_${bamboo_buildNumber} on ${DATE_STR}"
+    echo "Tagging current commit as a prod build"
+    git tag -a ${TAG_NAME} -m "${TAG_MESSAGE}"
+    git push --tags --repo=${bamboo_repository_git_repositoryUrl}
+
+ else
+    echo "Not creating a tag for DEV, UAT and CUSTOM (Non-Prod) builds."
+    
+fi
+
+echo "################################################################################################"
+echo "####################  FINISHED CREATING A TAG FOR PRODUCTION BUILD  ############################"
+echo "################################################################################################"
+
+
+echo "####################  REMOVING BUILD WORKING DIRECTORY NOW  #########################"
+# rm -rf ${CSX_PROJECT_BASEDIR}
+echo "###################  DONE REMOVING BUILD WORKING DIRECTORY  ######################"

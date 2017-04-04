@@ -1,0 +1,90 @@
+C:\Users\T8054>cleartool lsview -l -prop -full s2584_hw_P0003854_dev3
+Tag: s2584_hw_P0003854_dev3
+  Global path: \\Vmatcs2584w72\ccstg\s2584_hw_P0003854_dev3.vws
+  Server host: Vmatcs2584w72
+  Region: jax_windows
+  Active: NO
+  View tag uuid:d377a80a.7ed94667.8251.4d:22:04:71:35:20
+View on host: Vmatcs2584w72
+View server access path: C:\CCSTG\s2584_hw_P0003854_dev3.vws
+View uuid: d377a80a.7ed94667.8251.4d:22:04:71:35:20
+View attributes: snapshot,ucmview
+View owner: CSX\s2584
+
+Created 2013-09-16T14:06:05-04:00 by CSX\S2584.CSX\Domain Users@Vmatcs2584w72
+Last modified 2013-09-16T14:06:19-04:00 by CSX\S2584.CSX\Domain Users@VMATCS2584W72.csxt.ad.csx.com
+Last accessed 2013-09-16T14:06:19-04:00 by CSX\S2584.CSX\Domain Users@VMATCS2584W72.csxt.ad.csx.com
+Last read of private data 2013-09-16T14:06:19-04:00 by CSX\S2584.CSX\Domain Users@VMATCS2584W72.csxt.ad.csx.com
+Last config spec update 2013-09-16T14:06:06-04:00 by CSX\S2584.CSX\Domain Users@VMATCS2584W72.csxt.ad.csx.com
+Last view private object update 2013-09-16T14:06:19-04:00 by CSX\S2584.CSX\Domain Users@VMATCS2584W72.csxt.ad.csx.com
+Text mode: unix
+Properties: snapshot ucmview readwrite
+Owner: CSX\S2584        : rwx (all)
+Group: CSX\Domain Users : rwx (all)
+Other:                  : r-x (read)
+Additional groups: VMATCS2584W72\Direct RDP Access Administrators BUILTIN\Remote Desktop Users BUILTIN\Users CSX\TS_Comm
+on_Apps CSX\ECM_H08-R CSX\DM_L_TJAX6000FS_DEVLIBS CSX\MktGLobl-sc-TJAX2008 CSX\IAM-HSM-Technology CSX\ECM_HAA080101-R CS
+X\IAM-MZSRMTEC CSX\SP-Menu-LoadingReportGroup CSX\CSXIPricingProjects CSX\TS_Web_General_Users CSX\IAM-TS_Web_General_Us
+ers CSX\DM_S_TJAX6000FS_BMD CSX\DR_Team CSX\yardentr CSX\DM_P_TJAX6000FS_ENTDEV CSX\EntDev CSX\TS_Visio_2010_Users CSX\I
+AM-TS_Outlook_2010_Users CSX\SP-Menu-Employees CSX\TS_Maint_Users CSX\IAM-SP-Menu-Employees CSX\TS_Outlook_2010_Users CS
+X\TeamEnt_Procard-lo-2008fs
+
+****************************  To show all views having 2584 as a part of the view name  ****************************
+
+
+
+C:\Users\T8054>cleartool lsview *2584*
+  s2584_sx_P0002151b_dev \\keane-47d1b4218\ccstg\s2584_sx_P0002151b_dev.vws
+  s2584_ob_TMTN000376_dev \\keane-47d1b4218\ccstg\s2584_ob_TMTN000376_dev.vws
+  s2584_ws_commapps_P000909_dev \\keane-47d1b4218\ccstg\s2584_ws_commapps_P000909_dev.vws
+  s2584_ys_P0002709_dev \\keane-47d1b4218\RAD8_MigrationView\s2584_ys_P0002709_dev.vws
+  s2584_aw_TDEV001216_dev \\keane-47d1b4218\RAD8_MigrationView\s2584_aw_TDEV001216_dev.vws
+  s2584_ye_yard_enterprise01_dev \\keane-47d1b4218\CBA_Yard_Enterprise01_view\s2584_ye_yard_enterprise01_dev.vws
+  s2584_ye_yard_enterprise01_dev2 \\tjaxv107app\ccstg_d\views\\CSX\s2584\ye_yard_enterprise01_dev.vws
+  s2584_ys_P0002709_dev2 \\LT550TECS2584\CCSTG\s2584_ys_P0002709_dev
+  s2584_ys_P0002709_dev_2 \\LT550TECS2584\CCSTG\s2584_ys_P0002709_dev_2.vws
+  s2584_ob_TMTN000376_dev2 \\LT550TECS2584\CCSTG\s2584_ob_TMTN000376_dev2.vws
+  s2584_ws_commapps_P000909_dev2 \\LT550TECS2584\CCSTG\s2584_ws_commapps_P000909_dev2.vws
+  s2584_aw_TDEV001216_dev2 \\LT550TECS2584\CCSTG\s2584_aw_TDEV001216_dev2.vws
+  s2584_ac_P0000285_dev_2 \\LT550TECS2584\CCSTG\s2584_ac_P0000285_dev_2.vws
+  s2584_en_enterprise_ui01_dev \\LT550TECS2584\CCSTG\s2584_en_enterprise_ui01_dev.vws
+  s2584_aw_TDEV001216_dev_3 \\LT550TECS2584\AWOI_ClearCase_View_03192012\s2584_aw_TDEV001216_dev_3.vws
+  s2584_en_P0005147_dev_3 \\LT550TECS2584\CCSTG\s2584_en_P0005147_dev_3.vws
+  s2584_aw_TDEV001216_dev_2 \\LT550TECS2584\CLEARCASE_WAS7MIGRATION\aw_TDEV001216_dev_2.vws
+  s2584_dc_p0002043_dev \\LT550TECS2584\ClearcaseProjects\s2584_dc_p0002043_dev.vws
+  s2584_hw_P0003854_dev \\LT550TECS2584\CCSTG\s2584_hw_P0003854_dev.vws
+  s2584_ac_P0000285_dev_2_2 \\LT550TECS2584\ClearcaseProjects\s2584_ac_P0000285_dev_2_2.vws
+  s2584_ys_P0002709_dev_3 \\LT550TECS2584\ClearcaseProjects\s2584_ys_P0002709_dev_3.vws
+  s2584_ye_P0005358a_dev \\LT550TECS2584\ClearcaseProjects\s2584_ye_P0005358a_dev.vws
+  s2584_ye_P0005358a_dev_2 \\LT550TECS2584\CCSTG\s2584_ye_P0005358a_dev_2.vws
+  s2584_ye_P0005358a_dev_3 \\LT550TECS2584\CCSTG\s2584_ye_P0005358a_dev_3.vws
+  s2584_dc_p0002043_dev2 \\LT550TECS2584\CCSTG\s2584_dc_p0002043_dev2.vws
+  s2584_dc_p0002043_dev3 \\LT550TECS2584\CCSTG\s2584_dc_p0002043_dev3.vws
+  s2584_dc_p0002043_dev4 \\LT550TECS2584\CCSTG\s2584_dc_p0002043_dev4.vws
+  s2584_dc_p0002043_dev5 \\LT550TECS2584\CCSTG\s2584_dc_p0002043_dev5.vws
+  s2584_dc_p0002043_dev6 \\LT550TECS2584\CCSTG\s2584_dc_p0002043_dev6.vws
+  s2584_dc_p0002043_dev7 \\LT550TECS2584\CCSTG\s2584_dc_p0002043_dev7.vws
+  s2584_dc_p0002043_dev8 \\LT550TECS2584\CCSTG\s2584_dc_p0002043_dev8.vws
+  S2584_ye_P0005358a_dev \\Ws-s2584nttdata\ccstg\S2584_ye_P0005358a_dev.vws
+  S2584_ye_P0005358a_dev_2 \\Ws-s2584nttdata\ccstg\S2584_ye_P0005358a_dev_2.vws
+  S2584_ye_P0005358a_dev_3 \\Ws-s2584nttdata\ccstg\S2584_ye_P0005358a_dev_3.vws
+  S2584_ac_P0000285_dev_2 \\Ws-s2584nttdata\ccstg\S2584_ac_P0000285_dev_2.vws
+  S2584_hw_AutoClearanceSystem01_dev \\Ws-s2584nttdata\ccstg\S2584_hw_AutoClearanceSystem01_dev.vws
+  S2584_hw_P0003854_dev \\Ws-s2584nttdata\ccstg\S2584_hw_P0003854_dev.vws
+  S2584_ac_autoclear01_dev \\Ws-s2584nttdata\ccstg\S2584_ac_autoclear01_dev.vws
+  S2584_ye_P0005358a_dev_4 \\Ws-s2584nttdata\ccstg\S2584_ye_P0005358a_dev_4.vws
+  s2584_ye_P0005358a_dev2 \\tjaxv107app\ccstg_d\views\\CSX\s2584\ye_P0005358a_dev2.vws
+  S2584_ye_P0005358a_dev_5 \\Ws-s2584nttdata\ccstg\S2584_ye_P0005358a_dev_5.vws
+  S2584_dc_p0002043_dev \\Ws-s2584nttdata\ccstg\S2584_dc_p0002043_dev.vws
+  s2584_dc_p0002043_dev9 \\tjaxv107app\ccstg_d\views\\CSX\s2584\dc_p0002043_dev9.vws
+  s2584_hm_P0003854_dev \\Vmatcs2584w72\ccstg\s2584_hm_P0003854_dev.stg
+  s2584_ye_P0005358a_dev3 \\tjaxv107app\ccstg_d\views\\CSX\s2584\ye_P0005358a_dev3.vws
+  s2584_hw_AutoClearanceSystem01_dev \\Vmatcs2584w72\ccstg\s2584_hw_AutoClearanceSystem01_dev.vws
+  S2584_hw_AutoClearanceSystem01_dev_2 \\Ws-s2584nttdata\ccstg\S2584_hw_AutoClearanceSystem01_dev_2.vws
+  s2584_hw_P0003854_dev2 \\Vmatcs2584w72\ccstg\s2584_hw_P0003854_dev2.vws
+  s2584_ye_P0005358a_dev4 \\Vmatcs2584w7\ccstg\s2584_ye_P0005358a_dev4.vws
+  s2584_ac_P0000285_dev_3 \\Vmatcs2584w72\ccstg\s2584_ac_P0000285_dev_3.vws
+  s2584_en_enterprise_ui01_dev2 \\Vmatcs2584w72\ccstg\s2584_en_enterprise_ui01_dev2.vws
+  s2584_hw_P0003854_dev3 \\Vmatcs2584w72\ccstg\s2584_hw_P0003854_dev3.vws
+
+C:\Users\T8054>

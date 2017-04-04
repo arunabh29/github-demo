@@ -1,0 +1,27 @@
+Create snapshot view at local storage location (using own machine as storage location)
+
+cleartool mkview -snapshot -tag t8054_mc_mtiapp01_dev -tmode strip_cr -stream mc_mtiapp01_dev@\csx_mechanical -vws \\Lt550tect8054\ccstg\t8054_mc_mtiapp01_dev.vws C:\Users\T8054\snapshot_views\t8054_mc_mtiapp01_dev
+
+cleartool update -add_loadrules mtiapp
+
+
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+
+C:\Users\T8054\snapshot_views\t8054_mc_mtiapp01_dev>cleartool lsview -long t8054_mc_mtiapp01_dev
+Tag: t8054_mc_mtiapp01_dev
+  Global path: \\tjaxv320app\BuildForgeViewStorage\CSX\t8054\t8054_mc_mtiapp01_dev.vws
+  Server host: tjaxv320app
+  Region: jax_windows
+  Active: NO
+  View tag uuid:d759beaa.bcb84ade.afc7.eb:45:b2:93:96:e9
+View on host: tjaxv320app
+View server access path: D:\BuildForgeViewStorage\CSX\t8054\t8054_mc_mtiapp01_dev.vws
+View uuid: d759beaa.bcb84ade.afc7.eb:45:b2:93:96:e9
+View attributes: snapshot,ucmview
+View owner: CSX\t8054
+
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+
+A-13064-45484

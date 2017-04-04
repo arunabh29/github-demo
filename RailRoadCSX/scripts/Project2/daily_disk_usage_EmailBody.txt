@@ -1,0 +1,23 @@
+Disk space used by each file/folder under /opt/shared/atlassian/bamboo/: 
+ 
+468K	analytics-logs
+53G	artifacts
+8.0K	atlassian.jks
+4.0K	backups
+4.0K	bamboo.cfg.xml
+4.0K	bamboo-mail.cfg.xml
+4.0K	bandana-whitelist.list
+62M	buildfiles
+341M	caches
+168K	database
+1.2M	export
+1.5M	index
+1.4M	jms-store
+106M	logs
+18M	plugins
+8.0K	remoting-whitelist.list
+16K	scripts
+8.0K	serverState
+73M	temp
+4.0K	templates
+77G	xml-data

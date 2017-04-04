@@ -1,0 +1,35 @@
+########################################################################################
+########################################################################################
+
+TAR_NAME=$1
+
+if [ ${bamboo_planRepository_branchName} == master ]
+ then
+    echo "Creating a JIRA issue for this production build."
+    curl --version
+    python --version
+    python /opt/shared/atlassian/bamboo/Bamboo_External_Scripts/python_scripts/python_jira/python_jira_new/createJiraIssue_latest.py ${TAR_NAME} ${TAR_NAME}_prod_${bamboo_buildNumber}.tar ${bamboo_buildTimeStamp} ${bamboo_buildNumber}
+    
+    # Sleep 5 seconds for xml payload to be created and used by Curl
+    sleep 5
+    
+    # Changing to directory that contains xml payload.
+    cd /opt/shared/atlassian/bamboo/Bamboo_External_Scripts/python_scripts/python_jira/python_jira_new
+
+    echo ----------------------------------------------
+    echo ------  Calling Webservice now --------------
+    echo ---------------------------------------------
+
+    # calling prod webservice
+    curl --header "Content-Type: text/xml;charset=UTF-8" --header "SOAPAction: http://www.csx.com/SmartService/Update" --data @SM_Input_new.xml http://webservices/MZ_LOC_UpdateSmartService_V1
+
+    echo
+    echo ---------------------------------------------
+    echo ------- Done calling Webservice -------------
+    echo ---------------------------------------------
+
+ 
+ else
+    echo "Skipping this step for Non-Prod builds."
+    
+fi

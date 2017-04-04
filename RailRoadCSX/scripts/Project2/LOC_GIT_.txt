@@ -1,0 +1,10 @@
+Repository:  https://z_devops@git.csx.com/scm/jw/waysidegui.git
+Total lines of code in the repo:  572
+Total files in the repo excluding .git, .png, .jpg, .swf, .gif, .pdf, .swf and .log files:  40
+**************************************************************************************************
+**************************************************************************************************
+Repository:  https://z_devops@git.csx.com/scm/en/webframework.git
+Total lines of code in the repo:  253536
+Total files in the repo excluding .git, .png, .jpg, .swf, .gif, .pdf, .swf and .log files:  171
+**************************************************************************************************
+**************************************************************************************************

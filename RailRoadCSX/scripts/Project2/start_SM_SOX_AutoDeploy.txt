@@ -1,0 +1,8 @@
+# Setting environment variables before using cx_Oracle module in python (script being called from here).
+export ORACLE_HOME=/ora01/oracle/product/11.2.0/client
+export LD_LIBRARY_PATH=/ora01/oracle/product/11.2.0/client/lib
+
+python --version
+
+# Currently only triggers the Rational Deploy script below (should finally trigger the WAS and Coldfusion deploy scripts too) 
+python /home/t8054/Arunabh_sandbox/Bamboo_External_Scripts/SOX/PeopleSoft/Auto_Deploy/Deploy_Rational_to_PROD_SM-ChangePackage.py

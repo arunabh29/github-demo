@@ -1,0 +1,144 @@
+#!/bin/ksh
+
+BUILD_NUMBER=$1
+CHANGE=$2
+WORK_DIR="/home/t8054/Arunabh_sandbox/Bamboo_External_Scripts/SOX/PeopleSoft/peoplesoft_repo/peoplesoft"
+CHANGESET_FILE_PATH="/home/t8054/Arunabh_sandbox/Bamboo_External_Scripts/SOX/PeopleSoft/BUILD_RESULTS/${BUILD_NUMBER}/jira_attachment.txt"
+SSH_KEY_FILENAME="/home/z_mzauto/.ssh/agentinfo"
+SSH_PASS="/home/z_mzauto/.ssh/id_rsa"
+
+echo "ChangeSet File Path is: ${CHANGESET_FILE_PATH}" 
+
+
+    for each in `cat ${CHANGESET_FILE_PATH}` ;
+     do
+
+       # FILE_TYPE=`echo $each | cut -f2 -d"."`
+       FILE_TYPE=`echo $each | rev | cut -d"." -f1 | rev`
+  
+       if [ ${FILE_TYPE} == gnt -o ${FILE_TYPE} == idy -o ${FILE_TYPE} == int ]
+        then
+         DEST_DIR="/opt/local/software/pt854/psoft/cblbin"
+         echo "File type is gnt OR int OR idy"
+         echo "Destination dir is: " ${DEST_DIR}
+         echo "Actual path: " ${WORK_DIR}/$each
+         for DEST_SVR in lnx20780 lnx20781;
+		do
+		  echo "Now copying gnt, idy and int files on ${DEST_SVR}"
+                scp -i ${SSH_PASS} ${WORK_DIR}/$each z_mzauto@${DEST_SVR}:${DEST_DIR}/
+		  echo " -----------------  Done copying gnt, idy and int files on ${DEST_SVR} ------------------- "
+		  echo " --------------------------------------------------------------------------------------------- "
+		  # ssh ${DEST_SVR} chown ca7onl:psoft ${DEST_SVR}:${DEST_DIR}/$each
+		done	
+         echo "Done installing gnt, idy and int files" 
+	  echo "--------------------------------------------"
+	  echo "--------------------------------------------"
+       fi
+
+
+
+       if [ ${FILE_TYPE} == cbl ]
+        then
+         DEST_DIR="/opt/local/software/pt854/psoft/src/cbl"
+         echo "File type is cbl"
+         echo "Destination dir is: " ${DEST_DIR}
+         echo "Actual path: " ${WORK_DIR}/$each
+         for DEST_SVR in lnx20780 lnx20781;
+		do
+		  echo " -----------------  Now copying cbl files on ${DEST_SVR} ------------------- "
+		  scp -i ${SSH_PASS} ${WORK_DIR}/$each z_mzauto@${DEST_SVR}:${DEST_DIR}/
+		  echo " -----------------  Done copying cbl files on ${DEST_SVR} ------------------- "
+		  echo " --------------------------------------------------------------------------------------------- "
+		  # ssh ${DEST_SVR} chown ca7onl:psoft ${DEST_SVR}:${DEST_DIR}/$each
+		done
+	  echo "Done installing cbl files" 
+	  echo "--------------------------------------------"
+	  echo "--------------------------------------------"
+       fi
+
+
+
+       if [ ${FILE_TYPE} == in -o ${FILE_TYPE} == xml -o ${FILE_TYPE} == template ]
+        then
+         DEST_DIR="/opt/local/data/psoft/cntl"
+         echo "File type is OR xml OR template"
+         echo "Destination dir is: " ${DEST_DIR}
+         echo "Actual path: " ${WORK_DIR}/$each
+         for DEST_SVR in lnx20780 lnx20781 lnx20782 lnx20783;
+		do
+		  echo " -----------------  Now copying in, xml and template files on ${DEST_SVR} ------------------- "
+		  scp -i ${SSH_PASS} ${WORK_DIR}/$each z_mzauto@${DEST_SVR}:${DEST_DIR}/
+		  echo " -----------------  Done copying in, xml and template files on ${DEST_SVR} ------------------- "
+		  echo " --------------------------------------------------------------------------------------------- "
+		  # ssh ${DEST_SVR} chown ca7onl:sys ${DEST_SVR}:${DEST_DIR}/$each		  
+		done
+	  echo "Done installing in, xml and template files" 
+	  echo "--------------------------------------------"
+	  echo "--------------------------------------------"
+       fi
+   
+
+   
+       if [ ${FILE_TYPE} == datin -o ${FILE_TYPE} == DATIN -o ${FILE_TYPE} == csv ]
+        then
+         DEST_DIR="/opt/local/data/psoft/input"
+         echo "File type is OR xml OR csv"
+         echo "Destination dir is: " ${DEST_DIR}
+         echo "Actual path: " ${WORK_DIR}/$each
+         for DEST_SVR in lnx20780 lnx20781 lnx20782 lnx20783;
+		do
+		  echo " -----------------  Now copying datin, DATIN and csv files on ${DEST_SVR} ------------------- "
+		  scp -i ${SSH_PASS} ${WORK_DIR}/$each z_mzauto@${DEST_SVR}:${DEST_DIR}/
+		  echo " -----------------  Done copying datin, DATIN and csv files on ${DEST_SVR} ------------------- "
+		  echo " --------------------------------------------------------------------------------------------- "
+		  # ssh ${DEST_SVR} chown ca7onl:sys ${DEST_SVR}:${DEST_DIR}/$each		  
+		done
+	  echo "Done installing datin, DATIN and csv files" 
+	  echo "--------------------------------------------"
+	  echo "--------------------------------------------"
+       fi
+
+
+       if [ ${FILE_TYPE} == sqr -o ${FILE_TYPE} == sqc ]
+        then
+         DEST_DIR="/opt/local/software/pt854/psoft/sqr"
+         echo "File type is sqr OR sqc"
+         echo "Destination dir is: " ${DEST_DIR}
+         echo "Actual path: " ${WORK_DIR}/$each
+         for DEST_SVR in lnx20780 lnx20781 lnx20782 lnx20783;
+		do
+		  echo " -----------------  Now copying sqr and sqc files on ${DEST_SVR} ------------------- "
+		  scp -i ${SSH_PASS} ${WORK_DIR}/$each z_mzauto@${DEST_SVR}:${DEST_DIR}/
+		  echo " -----------------  Done copying sqr and sqc files on ${DEST_SVR} ------------------- "
+		  echo " ------------------------------------------------------------------------------------ "
+		  # ssh ${DEST_SVR} chown ca7onl:psoft ${DEST_SVR}:${DEST_DIR}/$each		  
+		done
+	  echo "Done installing sqr and sqc files" 
+	  echo "--------------------------------------------"
+	  echo "--------------------------------------------"
+       fi
+   
+   
+       if [ ${FILE_TYPE} == sh ]
+        then
+         DEST_DIR="/opt/software/batch/scripts"
+	  DEST_SVR=lnx20629
+         echo "Actual path: " ${WORK_DIR}/$each
+         echo "Destination dir is: " ${DEST_DIR}
+         echo "Actual path: " ${WORK_DIR}/$each
+         
+	  echo " -----------------  Now copying shell-scripts on ${DEST_SVR} ------------------- "
+	  scp -i ${SSH_PASS} ${WORK_DIR}/$each z_mzauto@${DEST_SVR}:${DEST_DIR}/
+	  echo " -----------------  Done copying shell-scripts on ${DEST_SVR} ------------------- "
+	  echo " ------------------------------------------------------------------------------------ "
+	  # ssh ${DEST_SVR} chown ca7onl:sys ${DEST_SVR}:${DEST_DIR}/$each
+	  echo "Done installing shell scripts" 
+	  echo "--------------------------------------------"
+	  echo "--------------------------------------------"  
+
+       fi
+
+    done
+
+echo "Changing state of this Change-Record to IMPLEMENTED: " ${CHANGE}
+/home/t8054/Arunabh_sandbox/Bamboo_External_Scripts/SOX/PeopleSoft/Auto_Deploy/Update_Change_to_IMPL_Rational.ksh ${CHANGE}

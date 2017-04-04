@@ -1,0 +1,37 @@
+                                                                     
+                                                                     
+C:\>ping smtp-relay.dli.state.pa.us
+
+Pinging smtp-relay.dli.state.pa.us [164.156.232.39] with 32 bytes of data:
+
+Reply from 164.156.232.39: bytes=32 time<1ms TTL=62
+Reply from 164.156.232.39: bytes=32 time<1ms TTL=62
+Reply from 164.156.232.39: bytes=32 time<1ms TTL=62
+Reply from 164.156.232.39: bytes=32 time<1ms TTL=62
+
+Ping statistics for 164.156.232.39:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>telnet smtp-relay.dli.state.pa.us 25
+
+220 ns2-ext.dli.state.pa.us ESMTP Sendmail 8.13.8/8.13.8; Fri, 12 Jul 2013 13:36
+:50 -0400
+helo cwopa
+250 ns2-ext.dli.state.pa.us Hello [10.92.31.76], pleased to meet you
+mail from: <c-archowdh@pa.gov>
+250 2.1.0 <c-archowdh@pa.gov>... Sender ok
+rcpt to: <c-archowdh@pa.gov>
+250 2.1.5 <c-archowdh@pa.gov>... Recipient ok
+data
+354 Enter mail, end with "." on a line by itself
+Hello there from my temp machine. This is a test email.
+.
+250 2.0.0 r6CHao0O025835 Message accepted for delivery
+quit
+221 2.0.0 ns2-ext.dli.state.pa.us closing connection
+
+
+Connection to host lost.
+
