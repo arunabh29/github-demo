@@ -1,0 +1,18 @@
+Mortgage: 1274
+HOA: 35
+CDD: 161
+Home Ins: 65
+Real Estate Taxes: 300
+Health Ins: 901
+Auto Ins: 120
+Comcast: 71
+Verizon: 158
+Experian: 25
+Netflix: 19
+Amazon Prime: 12
+Vonage: 41
+Turner Pest: 86
+Electricity: 75
+Water: 100
+Gas: 25
+CSX Parking: 54

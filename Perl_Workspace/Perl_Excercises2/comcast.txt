@@ -1,0 +1,54 @@
+Comcast Live Chat
+Session Connected!Exit ChatView Transcript
+user Guest has entered room
+analyst Mohit has entered room
+Mohit: Hello Guest_, Thank you for contacting Comcast Live Chat Support. My name is Mohit. Please give me one moment to review your information.
+Guest: My Issue: New Customer Active Address
+Mohit: It is a pleasure to have you on Chat. How are you doing today?
+Guest: Im good
+Guest: i have a question about my new comcast account bill
+Mohit: Glad to know that you are doing good.
+Mohit: I would be more than happy to help you with this.
+Guest: I signed up for a promotional offer of 55 per month plus taxes, why does my bill say a recurring charge of 121 per month ?
+Guest: its only been three days since i turned on service
+Mohit: If I could help you with this, believe me I would’ve been the first person to do so. It’s just that I am in the sales department and can help you with setting up of new services and upgrades. For your query, there is a separate dedicated department which can certainly resolve it for you.
+Mohit: I need to transfer your chat to the billing departement. they will surely help you with this.
+Mohit: Before transferring your chat is there anything in may I help you with ?
+Guest: no thanks
+Guest: please transfer me
+Mohit: Please stay connect, I am transferring your chat.
+Mohit: Please wait, while the problem is escalated to another analyst
+user Guest has entered room
+analyst Aldrin has entered room
+Waiting for response from Mohit
+analyst Mohit has left room
+Aldrin: Hi!
+Aldrin: For security purposes, please provide your account name, account number and the last 4 digits of SSN.
+Guest: account name is Debasmita
+Guest: account number is: 8495741401199603
+Guest: SSN last four is 4587
+Aldrin: Thanks!
+Aldrin: I have the account
+Aldrin: Is ROY.DEBASMITA@COMCAST.NET still the best e-mail address that we can send important Comcast account related updates?
+Guest: roy.debasmita@gmail.com would be better
+Guest: that is what is on the account
+Aldrin: Thanks! I updated it.
+Texas
+Guest: Hello
+Aldrin: Going back to your issue, I see here that you current service is internet plus for $49.99. There's a professional installation charge for $50 that is why your balance period from 5/2 - 6/1 is $110.92 but moving forward your monthly rate will be at $57.67 including taxes
+Guest: okay for some reason my bill say a recurring charge of 121.95 per month ?
+Aldrin: Please disregard that balance. Your updated balance period from 5/2 - 6/1 is $110.92 and will due on 5/23. We do apologize for the inconvenience on your end.
+Guest: no probs - as long as the promotional offer I signed up for is honoured I'm good
+Guest: do not want to pay 110 for internet every month 
+Aldrin: Yes, no worries, your monthly rate will be at $57.67 including taxes for the next 12 months. The reason why your bill is high for this month is because of the professional installation of $50.
+Aldrin: Was I able to addressed your issue?
+Guest: okay understood - thanks !
+Aldrin: You're welcome.
+Aldrin: Is it okay if you could answer the survey after this chat?
+Guest: sure
+Sound  Toggle Sound
+
+Type Here...
+Send
+Comcast
+©2016
