@@ -1,2 +1,0 @@
-### PROD - Peoplesoft Auto-Deploy
-2,7,12,17,22,27,32,37,42,47,52,57 * * * * SSH_AUTH_SOCK=`cat /home/z_mzauto/.ssh/agentinfo | cut -f1 -d ";" | head -n +1 | cut -f2 -d "="`  /usr/bin/flock -n /tmp/cronlockfile.log /home/t8054/Arunabh_sandbox/Bamboo_External_Scripts/SOX/PeopleSoft/Auto_Deploy/start_SM_SOX_AutoDeploy.ksh  >> /home/t8054/Arunabh_sandbox/Bamboo_External_Scripts/SOX/PeopleSoft/Auto_Deploy/logs/PeopleSoft_Autodeploy_JIRA.log 2>&1 --minutely

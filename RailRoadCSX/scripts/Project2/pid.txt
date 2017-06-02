@@ -1,3 +1,0 @@
-echo $$
-
-/usr/local/bin/sudo su - -c "chown ca7onl:psoft ${DEST_DIR}/$each"
