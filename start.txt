@@ -1,3 +1,4 @@
 Git quick start demo
 Adding a second line for 2nd commit.
 Adding a third line for 3rd commit.
+Adding a fourth line for 4th commit.
